@@ -23,6 +23,16 @@ agent-rebuild-workspace/
   frontend/   ChatGPT 风格对话前端
 ```
 
+## 环境变量
+
+后端环境变量模板在 `backend/.env.example`。复制成 `backend/.env` 后填写真实配置：
+
+```powershell
+Copy-Item backend\.env.example backend\.env
+```
+
+`backend/.env` 不会提交到 GitHub，真实 API Key（接口密钥）、数据库地址和模型配置都写在这里。
+
 ## 学习方式
 
 每个模块按四个问题学习：
