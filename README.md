@@ -44,7 +44,7 @@ agent-rebuild-workspace/
 cd backend
 python -m venv .venv
 .venv\Scripts\activate
-pip install -r requirements.txt
+python -m pip install -e ".[dev]"
 uvicorn app.main:app --reload --port 8010
 ```
 
@@ -52,6 +52,7 @@ uvicorn app.main:app --reload --port 8010
 
 ```bash
 cd backend
+.\.venv\Scripts\python -m pip install -e ".[dev]"
 .\.venv\Scripts\python -m pytest
 .\.venv\Scripts\python -m uvicorn app.main:app --reload --port 8010
 ```
@@ -65,3 +66,12 @@ npm run dev
 ```
 
 第一版后端不依赖真实数据库和真实大模型，可以直接用 fake data（假数据）验证主链路。
+
+## CI/CD
+
+当前已经配置 CI（持续集成），文件在 `.github/workflows/ci.yml`：
+
+1. Backend tests（后端测试）：安装 `backend/pyproject.toml`，运行 `pytest`。
+2. Frontend build（前端构建）：运行 `npm ci` 和 `npm run build`。
+
+CD（持续部署）暂时不接，因为第一阶段还没有明确部署目标。等后续确定部署到服务器、Docker（容器）、Vercel（前端托管）或云平台后，再增加部署流水线。
